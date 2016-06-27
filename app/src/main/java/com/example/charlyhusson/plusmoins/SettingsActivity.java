@@ -16,6 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView displaySettings;
     public static final String mySettings = "mySettings";
     SharedPreferences sharedPreferences;
+    private TextView initialValeur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
         incrementValeur = (EditText) findViewById(R.id.incrementValue);
         saveButton = (Button) findViewById(R.id.saveButton);
         displaySettings = (TextView) findViewById(R.id.displaySettings);
+        initialValeur = (TextView) findViewById(R.id.initialValeur);
 
 
 
@@ -37,14 +39,16 @@ public class SettingsActivity extends AppCompatActivity {
 
             public void onClick(View v) {
 
-                String min = minValeur.getText().toString();
-                String max = maxValeur.getText().toString();
-                String increment = incrementValeur.getText().toString();
+                int min = new Integer(minValeur.getText().toString());
+                int max = new Integer(maxValeur.getText().toString());
+                int increment = new Integer(incrementValeur.getText().toString());
+                int initial = new Integer(initialValeur.getText().toString());
                 SharedPreferences sharedpreferences = getSharedPreferences(mySettings, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putString("minValeur", min);
-                editor.putString("maxValeur", max);
-                editor.putString("incrementValeur", increment);
+                editor.putInt("minValeur", min);
+                editor.putInt("maxValeur", max);
+                editor.putInt("incrementValeur", increment);
+                editor.putInt("initialValeur", initial);
                 editor.apply();
 
                 Toast.makeText(SettingsActivity.this,"Settings Saved ",Toast.LENGTH_LONG).show();

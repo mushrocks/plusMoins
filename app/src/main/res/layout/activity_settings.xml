@@ -91,4 +91,23 @@
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/saveButton"
         android:layout_alignBottom="@+id/saveButton" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/initialValeur"
+        android:layout_below="@+id/incrementValue"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valeur initiale"
+        android:id="@+id/initialValuerText"
+        android:layout_alignBottom="@+id/initialValeur"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

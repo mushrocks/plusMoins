@@ -82,8 +82,21 @@ public class PlusMoinsActivity extends AppCompatActivity {
 
     public void calculResultat(TextView c){
         try {
-            maValue = new Double(textA.getText().toString()) + new Double(textB.getText().toString());
-            updateView(c);
+            SharedPreferences sharedpreferences = getSharedPreferences(mySettings, Context.MODE_PRIVATE);
+
+            Double a = new Double(textA.getText().toString());
+            Double b = new Double(textB.getText().toString());
+
+            if(a > new Double(sharedpreferences.getAll().get("maxValeur").toString()) || b > new Double(sharedpreferences.getAll().get("maxValeur").toString())) {
+                Toast.makeText(PlusMoinsActivity.this,"Maximum reached",Toast.LENGTH_LONG).show();
+            }
+            else if(a < new Double(sharedpreferences.getAll().get("minValeur").toString()) || b < new Double(sharedpreferences.getAll().get("minValeur").toString())) {
+                Toast.makeText(PlusMoinsActivity.this,"Minimum not reached",Toast.LENGTH_LONG).show();
+            }
+            else {
+                maValue = new Double(textA.getText().toString()) + new Double(textB.getText().toString());
+                updateView(c);
+            }
         } catch (Exception e) {
             maValue=0;
             updateView(textC);
@@ -95,9 +108,11 @@ public class PlusMoinsActivity extends AppCompatActivity {
 
         SharedPreferences sharedpreferences = getSharedPreferences(mySettings, Context.MODE_PRIVATE);
 
-        t.setText("Min val: "+sharedpreferences.getAll().get("minValeur").toString()+"" +
-                "\nMax val: "+sharedpreferences.getAll().get("maxValeur").toString()+"" +
-                "\n Increment val :"+sharedpreferences.getAll().get("incrementValeur").toString());
+        t.setText("Min val: "+sharedpreferences.getInt("minValeur", 10)+"" +
+                "\nMax val: "+sharedpreferences.getInt("maxValeur", 2000)+"" +
+                "\n Increment val :"+sharedpreferences.getInt("incrementValeur", 1)+""+
+                "\n Initial val :"+sharedpreferences.getInt("initialValeur",0)
+        );
     }
 
 }
